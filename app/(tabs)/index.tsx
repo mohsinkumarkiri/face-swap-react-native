@@ -1,3 +1,4 @@
+/*
 import { Image } from 'expo-image';
 import { Platform, StyleSheet } from 'react-native';
 
@@ -94,5 +95,139 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     position: 'absolute',
+  },
+});
+
+*/
+
+import React, { useState } from "react";
+import {
+  Dimensions,
+  Platform,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+
+export default function TabOneScreen() {
+  const [visible, setVisible] = useState(false);
+  const { width, height } = Dimensions.get("window");
+  const isTablet = Math.min(width, height) >= 600;
+
+  return (
+    <SafeAreaView style={styles.safe}>
+      <View style={styles.container}>
+        <Text style={[styles.title, isTablet && styles.titleTablet]}>
+          FaceSwap — Demo
+        </Text>
+
+        <View style={[styles.card, isTablet && styles.cardTablet]}>
+          <Text style={[styles.instructions, isTablet && styles.instructionsTablet]}>
+            Tap the button to toggle the greeting
+          </Text>
+
+          <TouchableOpacity
+            activeOpacity={0.85}
+            style={[styles.button, isTablet && styles.buttonTablet]}
+            onPress={() => setVisible((s) => !s)}
+          >
+            <Text style={[styles.buttonText, isTablet && styles.buttonTextTablet]}>
+              {visible ? "Hide" : "Say Hello"}
+            </Text>
+          </TouchableOpacity>
+
+          {visible && <Text style={[styles.hello, isTablet && styles.helloTablet]}>👋 Hello!</Text>}
+        </View>
+
+        <Text style={styles.footer}>
+          Device: {Math.round(width)} × {Math.round(height)} {Platform.OS}
+        </Text>
+      </View>
+    </SafeAreaView>
+  );
+}
+
+const { width } = Dimensions.get("window");
+const baseFont = Math.max(14, width * 0.04);
+
+const styles = StyleSheet.create({
+  safe: { flex: 1, backgroundColor: "#f6f7fb" },
+  container: {
+    flex: 1,
+    alignItems: "center",
+    paddingHorizontal: "5%",
+    paddingTop: 28,
+    backgroundColor: "#f6f7fb",
+  },
+  title: {
+    fontSize: baseFont + 6,
+    fontWeight: "700",
+    marginBottom: 18,
+    color: "#111827",
+  },
+  titleTablet: {
+    fontSize: baseFont + 12,
+  },
+  card: {
+    width: "100%",
+    maxWidth: 720,
+    alignItems: "center",
+    backgroundColor: "#fff",
+    padding: 18,
+    borderRadius: 12,
+    shadowColor: "#000",
+    shadowOpacity: 0.06,
+    shadowRadius: 10,
+    elevation: 3,
+  },
+  cardTablet: {
+    padding: 28,
+  },
+  instructions: {
+    fontSize: baseFont,
+    textAlign: "center",
+    marginBottom: 14,
+    color: "#374151",
+  },
+  instructionsTablet: {
+    fontSize: baseFont + 4,
+  },
+  button: {
+    width: "60%",
+    minHeight: 48,
+    backgroundColor: "#2563eb",
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 12,
+    marginVertical: 12,
+  },
+  buttonTablet: {
+    width: "45%",
+    minHeight: 56,
+  },
+  buttonText: {
+    color: "#fff",
+    fontWeight: "700",
+    fontSize: baseFont,
+  },
+  buttonTextTablet: {
+    fontSize: baseFont + 2,
+  },
+  hello: {
+    marginTop: 12,
+    fontSize: baseFont + 6,
+    fontWeight: "800",
+    color: "#0f172a",
+  },
+  helloTablet: {
+    fontSize: baseFont + 12,
+  },
+  footer: {
+    marginTop: 30,
+    color: "#6b7280",
+    fontSize: 12,
   },
 });
