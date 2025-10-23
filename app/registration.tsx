@@ -4,14 +4,14 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import {
-    KeyboardAvoidingView,
-    Platform,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 
 export default function RegistrationPage() {
@@ -95,7 +95,7 @@ export default function RegistrationPage() {
 
             {/* Skip Button */}
             <TouchableOpacity onPress={handleSkip}>
-              <Text style={styles.skipText}>Skip for now</Text>
+              <Text style={styles.skipText} onPress={() => router.push('/home')}>Skip for now</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>

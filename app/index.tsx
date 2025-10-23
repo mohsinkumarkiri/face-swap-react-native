@@ -1,4 +1,5 @@
 import { LinearGradient } from 'expo-linear-gradient';
+import { useRouter } from 'expo-router'; // <-- Added import here
 import React, { useEffect } from 'react';
 import { Dimensions, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Animated, {
@@ -9,10 +10,11 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-
 const { width } = Dimensions.get('window');
 
 export default function Index() {
+  const router = useRouter();  // <-- Using the router
+
   // Fade-in and slide animation for content
   const fadeAnim = useSharedValue(0);
   const translateY = useSharedValue(20);
@@ -51,7 +53,7 @@ export default function Index() {
           <TouchableOpacity
             style={styles.button}
             activeOpacity={0.8}
-            onPress={() => console.log('Start pressed')}
+            onPress={() => router.push('/registration')}  // <-- Navigate on press
           >
             <Text style={styles.buttonText}>Start</Text>
           </TouchableOpacity>
@@ -96,6 +98,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 });
+
 
 
 /*
